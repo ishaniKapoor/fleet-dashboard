@@ -1,0 +1,72 @@
+Build a nested fleet viewer:
+
+Region → City → Depot → Vehicle
+
+Each node has:
+
+id
+name
+type
+optional children
+
+Vehicles also have:
+
+status
+battery
+
+Requirements
+
+0–10 min: Clarify/model
+Decide:
+
+one shared FleetNode interface or separate types?
+how do you identify leaf nodes?
+should vehicles have children? probably no.
+
+10–25 min: Mock data
+Create:
+
+2 regions
+2 cities per region
+1–2 depots per city
+2–3 vehicles per depot
+
+Include:
+
+low battery
+offline
+maintenance
+duplicate city names if you want an edge case
+
+25–45 min: Recursive rendering
+Create a component that renders one node, then recursively renders children.
+
+Use:
+
+@Input() node
+*ngIf
+*ngFor
+
+Goal: nested tree displays correctly. No styling needed.
+
+45–60 min: DFS helper
+Write one helper:
+
+findNodeById(nodes, id)
+
+Return matching node or undefined.
+
+Think through:
+
+check current node
+search children
+return as soon as found
+
+60–75 min: Explain out loud
+Answer:
+
+Why recursion?
+DFS time complexity?
+What if tree is huge?
+What if there’s a cycle?
+What edge cases would you test?
