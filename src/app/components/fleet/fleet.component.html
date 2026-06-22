@@ -1,0 +1,14 @@
+<div id="nodeDisplay">
+    <div id="node">
+        <strong> {{ node.name }}</strong> {{ node.type }}
+    </div>
+    <ng-container *ngIf="isBranch(node); else leafNode">
+        <div *ngFor="let child of node.children">
+            <app-fleet [node]="child"></app-fleet>
+        </div>
+    </ng-container>
+    <ng-template #leafNode>
+        <span> {{ node.status }}</span>
+        <span> {{ node.battery}}</span>
+    </ng-template>
+</div>
