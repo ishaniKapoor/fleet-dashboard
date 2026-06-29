@@ -36,7 +36,7 @@ Data Shape
     Transform it into the database shape you chose
     Insert the data into the DB
     Verify the inserted records manually with the DB query tools
-    
+
 5. Design the API
     Identify the endpoints you need:
     list regions
@@ -45,6 +45,7 @@ Data Shape
     Decide response shape and route structure
       e.g. /regions, /vehicles, /vehicles?status=maintenance
     Think about whether you want a recursive API or separate endpoints for each level
+
 6. Implement the backend
     Pick a Python framework to practice:
     Flask or FastAPI
@@ -53,6 +54,7 @@ Data Shape
     one layer for DB access
     one layer for request handling
     Add a simple test or manual check for each endpoint
+
 7. Add filtering/search
     Practice query translation:
     JSON query → Mongo filter
@@ -61,6 +63,7 @@ Data Shape
     status filtering
     low battery
     text search on vehicle names or locations
+
 8. Create the UI
     Choose desktop or web:
     Web: simple HTML/JS app or Angular/React/Vue
@@ -71,11 +74,13 @@ Data Shape
     selecting a region/city/depot
     filtering vehicles
     showing status/battery
+
 9. Connect UI to backend
     Call your API endpoints from the UI
     Display the responses
     Handle loading and error states
     Add a “refresh” or search box to exercise the backend
+
 10. Reflect and iterate
     Ask yourself:
     Did the DB model make queries easy?
@@ -85,6 +90,7 @@ Data Shape
     DB schema
     API route design
     UI rendering structure
+    
 11. Stretch goals
     Add a findNodeById or search endpoint in the backend
     Add aggregation:
