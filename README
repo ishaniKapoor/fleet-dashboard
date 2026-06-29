@@ -1,72 +1,96 @@
-Build a nested fleet viewer:
+Full stack app
 
-Region → City → Depot → Vehicle
+Data Shape
+  - Region
+    - City
+      - Depot
+        -Vehicle: - id
+                  - name
+                  - status
+                  - battery
+                  - location
 
-Each node has:
 
-id
-name
-type
-optional children
+1. Define the problem
+    Decide the data shape first:
+    Region → City → Depot → Vehicle
+    Vehicle fields: id, name, status, battery, location
+    Choose whether the backend stores nested documents or separate collections
+    Mongo: natural hierarchical documents or related collections
+    Elasticsearch: documents optimized for search and aggregation
 
-Vehicles also have:
+2. Prepare the JSON data
+    Start with a small sample JSON file that matches your fleet model
+    Validate the shape and make sure it includes:
+    multiple regions
+    duplicate city names / edge cases
+    vehicles with low battery / offline / maintenance
+    
+3. Learn the database basics
+    For Mongo:
+    understand collections, documents, and BSON
+    decide whether to store full tree documents or flattened structures
 
-status
-battery
-
-Requirements
-
-0–10 min: Clarify/model
-Decide:
-
-one shared FleetNode interface or separate types?
-how do you identify leaf nodes?
-should vehicles have children? probably no.
-
-10–25 min: Mock data
-Create:
-
-2 regions
-2 cities per region
-1–2 depots per city
-2–3 vehicles per depot
-
-Include:
-
-low battery
-offline
-maintenance
-duplicate city names if you want an edge case
-
-25–45 min: Recursive rendering
-Create a component that renders one node, then recursively renders children.
-
-Use:
-
-@Input() node
-*ngIf
-*ngFor
-
-Goal: nested tree displays correctly. No styling needed.
-
-45–60 min: DFS helper
-Write one helper:
-
-findNodeById(nodes, id)
-
-Return matching node or undefined.
-
-Think through:
-
-check current node
-search children
-return as soon as found
-
-60–75 min: Explain out loud
-Answer:
-
-Why recursion?
-DFS time complexity?
-What if tree is huge?
-What if there’s a cycle?
-What edge cases would you test?
+4. Build a simple migration workflow
+    Write a script that reads JSON
+    Transform it into the database shape you chose
+    Insert the data into the DB
+    Verify the inserted records manually with the DB query tools
+    
+5. Design the API
+    Identify the endpoints you need:
+    list regions
+    get one region/city/depot/vehicle
+    search vehicles by status or battery
+    Decide response shape and route structure
+      e.g. /regions, /vehicles, /vehicles?status=maintenance
+    Think about whether you want a recursive API or separate endpoints for each level
+6. Implement the backend
+    Pick a Python framework to practice:
+    Flask or FastAPI
+    Build the API routes and connect them to the DB
+    Keep the logic separate:
+    one layer for DB access
+    one layer for request handling
+    Add a simple test or manual check for each endpoint
+7. Add filtering/search
+    Practice query translation:
+    JSON query → Mongo filter
+    JSON query → Elasticsearch query
+    Implement:
+    status filtering
+    low battery
+    text search on vehicle names or locations
+8. Create the UI
+    Choose desktop or web:
+    Web: simple HTML/JS app or Angular/React/Vue
+    Desktop: Tkinter / PySide / Electron if you want a richer app
+    Design the UI to display the fleet tree and vehicles
+    Start with a list view, then add nested rendering
+    Add controls for:
+    selecting a region/city/depot
+    filtering vehicles
+    showing status/battery
+9. Connect UI to backend
+    Call your API endpoints from the UI
+    Display the responses
+    Handle loading and error states
+    Add a “refresh” or search box to exercise the backend
+10. Reflect and iterate
+    Ask yourself:
+    Did the DB model make queries easy?
+    Was the API easy to use from the UI?
+    Did the UI clearly show leaf nodes vs branches?
+    Improve one thing at a time:
+    DB schema
+    API route design
+    UI rendering structure
+11. Stretch goals
+    Add a findNodeById or search endpoint in the backend
+    Add aggregation:
+    count vehicles per depot
+    vehicles by status
+    Add a simple authentication layer
+    Add a small UI for editing/updating vehicle status
+    run: npm start (Frontend)
+        python -venv (Backend)

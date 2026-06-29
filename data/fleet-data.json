@@ -1,0 +1,28 @@
+{
+  "id": "1",
+  "name": "North America",
+  "type": "REGION",
+  "children": [
+    {
+      "id": "11",
+      "name": "Detroit",
+      "type": "CITY",
+      "children": [
+        {
+          "id": "111",
+          "name": "Flint",
+          "type": "DEPOT",
+          "children": [
+            {
+              "id": "1111",
+              "name": "Honda Civic",
+              "type": "VEHICLE",
+              "status": "ACTIVE",
+              "battery": 20
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
